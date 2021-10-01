@@ -18,6 +18,10 @@ defmodule TodoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/items", ItemsController, :index
+    post "/items", ItemsController, :create
+    patch "/items/:id/complete", ItemsController, :complete
+    delete "/items/:id", ItemsController, :delete
   end
 
   # Other scopes may use custom stacks.
