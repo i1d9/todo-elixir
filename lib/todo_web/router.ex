@@ -18,6 +18,11 @@ defmodule TodoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    
+    get "/register", AuthController, :new
+    post "/register", AuthController, :create
+
     get "/items", ItemsController, :index
     post "/items", ItemsController, :create
     patch "/items/:id/complete", ItemsController, :complete
