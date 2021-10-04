@@ -11,8 +11,8 @@ defmodule TodoWeb.AuthController do
         render conn, "new.html", changeset: changeset
     end
 
-    def create(conn, %{"user" => params}) do
-        changeset = User.changeset(%User{}, params)
+    def create(conn, %{"user" => user_params}) do
+        changeset = User.registration_changeset(%User{}, user_params)
         {:ok, user} = Repo.insert(changeset) 
         case Repo.insert(changeset) do
             {:ok, user} ->
@@ -21,16 +21,12 @@ defmodule TodoWeb.AuthController do
                 |> redirect(to: Routes.auth_path(conn, :index))
             {:error, changeset} ->
                 render conn, "new.html", changeset: changeset
-
-        end
-        
-            
+        end            
     end
 
     def show(conn, %{"id" => id}) do
         user = Repo.get(User, id)
         render conn, "show.html", user: user
-        
     end
 
     def index(conn, _params) do
