@@ -13,7 +13,6 @@ defmodule TodoWeb.AuthController do
 
     def create(conn, %{"user" => user_params}) do
         changeset = User.registration_changeset(%User{}, user_params)
-        {:ok, user} = Repo.insert(changeset) 
         case Repo.insert(changeset) do
             {:ok, user} ->
                 conn
