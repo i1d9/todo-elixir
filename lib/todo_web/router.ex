@@ -19,9 +19,8 @@ defmodule TodoWeb.Router do
 
     get "/", PageController, :index
 
-    
-    get "/register", AuthController, :new
-    post "/register", AuthController, :create
+   
+    resources "/auth", AuthController, only: [:index, :show, :new, :create]
 
     get "/items", ItemsController, :index
     post "/items", ItemsController, :create

@@ -1,0 +1,4 @@
+<h1>Showing User</h1>
+<%= @user.first_name %>
+<%= @user.second_name %>
+<%= @user.email %>
