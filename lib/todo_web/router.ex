@@ -8,6 +8,7 @@ defmodule TodoWeb.Router do
     plug :put_root_layout, {TodoWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Todo.Auth, repo: Todo.Repo
   end
 
   pipeline :api do
@@ -20,7 +21,7 @@ defmodule TodoWeb.Router do
     get "/", PageController, :index
 
    
-    resources "/auth", AuthController, only: [:index, :show, :new, :create]
+    resources "/user", UserController, only: [:index, :show, :new, :create]
 
     get "/items", ItemsController, :index
     post "/items", ItemsController, :create

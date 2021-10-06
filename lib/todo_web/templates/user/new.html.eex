@@ -3,7 +3,7 @@
 
 
 
-<%= form_for @changeset, Routes.auth_path(@conn, :create), fn f -> %>
+<%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
 
 
 <div class="form-group">

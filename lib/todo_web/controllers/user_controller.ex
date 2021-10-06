@@ -1,4 +1,4 @@
-defmodule TodoWeb.AuthController do
+defmodule TodoWeb.UserController do
     use TodoWeb, :controller
     alias Todo.Repo
     alias Todo.Users
@@ -19,7 +19,7 @@ defmodule TodoWeb.AuthController do
 
     @doc """
     
-    Handles the POST request from the create account page(auth/new.html)
+    Handles the POST request from the create account page(user/new.html)
 
     """
     def create(conn, %{"user" => user_params}) do
@@ -28,7 +28,7 @@ defmodule TodoWeb.AuthController do
             {:ok, user} ->
                 conn
                 |> put_flash(:info, "#{user.first_name} created!")
-                |> redirect(to: Routes.auth_path(conn, :index))
+                |> redirect(to: Routes.user_path(conn, :index))
             {:error, changeset} ->
                 render conn, "new.html", changeset: changeset
         end            
