@@ -2,8 +2,13 @@ defmodule Todo.Users.User do
     use Ecto.Schema
     import Ecto.Changeset
   
-    #A schema defines the native form of data in the database
 
+    @doc """
+    
+    A schema defined the structure of a database table
+    It contains the properites of each column
+
+    """
     schema "users" do
         field :first_name, :string
         field :second_name, :string
@@ -14,7 +19,13 @@ defmodule Todo.Users.User do
         timestamps()
     end
 
-    #If no params are passsed we pass an empty map which will invalidate the changeset 
+    @doc """
+
+    This function is used to validate an inbound struct according to the schema provided
+    If the inbound data is not defined the default paramaeter empty will be used
+
+    """
+    
     def changeset(user, params \\ :empty) do
         user
         |> cast(params, [:first_name, :second_name, :email, :phone])
@@ -25,10 +36,16 @@ defmodule Todo.Users.User do
         |> validate_format(:email, ~r/@/)
     end
 
-    #Used when registering and can hash passwords
+    @doc """
+    
+    This function is used to validate and hash the password when a new account is being created
+
+    It calls the first changeset then checks if the password has been defined, checks the length then hashes it
+
+    """
     def registration_changeset(user, params) do
         user
-        |> changeset(params)
+        |> changeset(params) 
         |> cast(params, [:password])
         |> validate_length(:password, min: 8, max: 100)
         |> put_pass_hash()

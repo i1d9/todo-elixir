@@ -6,11 +6,22 @@ defmodule TodoWeb.AuthController do
     
 
 
+    @doc """
+    
+    Renders the create account page
+
+    """
     def new(conn, _params) do
         changeset = User.changeset(%User{}, %{})
         render conn, "new.html", changeset: changeset
     end
 
+
+    @doc """
+    
+    Handles the POST request from the create account page(auth/new.html)
+
+    """
     def create(conn, %{"user" => user_params}) do
         changeset = User.registration_changeset(%User{}, user_params)
         case Repo.insert(changeset) do
