@@ -3,9 +3,20 @@ defmodule TodoWeb.UserController do
     alias Todo.Repo
     alias Todo.Users
     alias Todo.Users.User
+
+    plug :authenticate_user when action in [:index, :show]
+
+    def show(conn, %{"id" => id}) do
+        user = Repo.get(User, id)
+        render conn, "show.html", user: user
+    end
+
+    def index(conn, _params) do
+        users = Users.list_users()
+        render conn, "index.html", users: users
+    end
+
     
-
-
     @doc """
     
     Renders the create account page
@@ -34,16 +45,21 @@ defmodule TodoWeb.UserController do
         end            
     end
 
-    def show(conn, %{"id" => id}) do
-        user = Repo.get(User, id)
-        render conn, "show.html", user: user
-    end
+    @doc """
+    
+    If the user is not signed in
 
-    def index(conn, _params) do
-        users = Users.list_users()
-        render conn, "index.html", users: users
+    """
+    defp authenticate_user(conn, _opts) do
+        if conn.assigns.current_user do
+            conn
+        else
+            conn
+            |> put_flash(:error, "You must be logged in to access that page")
+            |> redirect(to: Routes.page_path(conn, :index))
+            |> halt()
+        end
     end
-
     
 
 end
