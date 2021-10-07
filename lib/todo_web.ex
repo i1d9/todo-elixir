@@ -24,6 +24,7 @@ defmodule TodoWeb do
       import Plug.Conn
       import TodoWeb.Gettext
       alias TodoWeb.Router.Helpers, as: Routes
+      import Todo.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -66,6 +67,7 @@ defmodule TodoWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import Todo.Auth, only: [authenticate_user: 2]
     end
   end
 

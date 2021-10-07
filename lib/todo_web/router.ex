@@ -23,11 +23,18 @@ defmodule TodoWeb.Router do
    
     resources "/user", UserController, only: [:index, :show, :new, :create]
     resources "/session", SessionController, only: [:new, :create, :delete]
-
+    
     get "/items", ItemsController, :index
     post "/items", ItemsController, :create
     patch "/items/:id/complete", ItemsController, :complete
     delete "/items/:id", ItemsController, :delete
+  end
+
+  scope "/content", TodoWeb do
+    pipe_through [:browser, :authenticate_user]
+    
+    resources "/tasks", TaskController
+    
   end
 
   # Other scopes may use custom stacks.
