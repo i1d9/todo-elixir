@@ -38,6 +38,7 @@ defmodule TodoWeb.UserController do
         case Repo.insert(changeset) do
             {:ok, user} ->
                 conn
+                |> Todo.Auth.login(user)
                 |> put_flash(:info, "#{user.first_name} created!")
                 |> redirect(to: Routes.user_path(conn, :index))
             {:error, changeset} ->
