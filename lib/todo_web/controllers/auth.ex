@@ -75,4 +75,9 @@ defmodule Todo.Auth do
                 {:error, :not_found, conn}
         end
     end
+
+
+    def logout(conn) do
+        configure_session(conn, drop: true)
+    end
 end
