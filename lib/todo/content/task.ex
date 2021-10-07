@@ -6,6 +6,7 @@ defmodule Todo.Content.Task do
     field :description, :string
     field :title, :string
     field :user_id, :id
+    
 
     timestamps()
   end

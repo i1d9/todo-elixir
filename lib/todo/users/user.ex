@@ -16,6 +16,7 @@ defmodule Todo.Users.User do
         field :phone, :string
         field :password, :string, virtual: true
         field :password_hash, :string
+        has_many :tasks, Todo.Content.Task
         timestamps()
     end
 
