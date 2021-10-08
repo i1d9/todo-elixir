@@ -2,7 +2,6 @@ defmodule TodoWeb.TaskController do
   use TodoWeb, :controller
 
   alias Todo.Content
-  alias Todo.Content.Task
   alias Todo.Repo
   
 

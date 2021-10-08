@@ -6,15 +6,18 @@ defmodule Todo.Content.Task do
     field :description, :string
     field :title, :string
     field :user_id, :id
+    belongs_to :category, Todo.Category
     
 
     timestamps()
   end
 
+  @required_fields ~w(title description)
+  @optional_fields ~w(categories_id) 
+
   @doc false
-  def changeset(task, attrs) do
+  def changeset(task, attrs \\ :empty) do
     task
-    |> cast(attrs, [:title, :description])
-    |> validate_required([:title, :description])
+    |> cast(attrs, @required_fields, @optional_fields)
   end
 end
