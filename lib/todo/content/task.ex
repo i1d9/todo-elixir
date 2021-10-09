@@ -13,11 +13,16 @@ defmodule Todo.Content.Task do
   end
 
   @required_fields ~w(title description)
-  @optional_fields ~w(categories_id) 
+  @optional_fields ~w(category_id) 
 
-  @doc false
+  @doc """
+  
+  The assoc_constraint function guarantees that a task can only be added if the category exists
+
+  """
   def changeset(task, attrs \\ :empty) do
     task
-    |> cast(attrs, @required_fields, @optional_fields)
+    |> cast(attrs, [:title, :description, :category_id])
+    |> assoc_constraint(:category)
   end
 end

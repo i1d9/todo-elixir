@@ -13,7 +13,10 @@
 alias Todo.Repo
 alias Todo.Category
 
-for category <- ~w(Action Drama Romance Comedy Sci-fi) do
+
+categories = ["Critical incident with very high impact",
+ "Major incident with significant impact", "Minor incident with low impact"]
+for category <- categories do
     Repo.get_by(Category, name: category) ||
         Repo.insert!(%Category{name: category})
     
