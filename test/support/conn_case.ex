@@ -25,7 +25,7 @@ defmodule TodoWeb.ConnCase do
       import TodoWeb.ConnCase
 
       alias TodoWeb.Router.Helpers, as: Routes
-
+      import Todo.TestHelpers
       # The default endpoint for testing
       @endpoint TodoWeb.Endpoint
     end
